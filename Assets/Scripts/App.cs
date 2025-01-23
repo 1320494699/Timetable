@@ -7,5 +7,8 @@ public class App :Architecture<App>
     {
         // 注册所有的 Module
         RegisterModel(new TimetableModel());
+        
+        //注册所有的Utility
+        RegisterUtility(new DataSaveLoadUtility());
     }
 }

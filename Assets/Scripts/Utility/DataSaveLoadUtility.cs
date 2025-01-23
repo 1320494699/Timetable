@@ -15,7 +15,6 @@ public class DataSaveLoadUtility:IUtility
         {
             return null;
         }
-
         return JsonUtility.FromJson<T>(jsonData);
     }
 }

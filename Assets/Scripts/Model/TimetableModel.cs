@@ -9,9 +9,14 @@ public class TimetableModel:AbstractModel
     protected override void OnInit()
     {
         //TODO: 先加载本地数据，如果没有，则初始化数据
-        
-        TimetableData = new TimetableData();
-        TimetableData.InitTimetableData(5,7);
+        var load = this.GetUtility<DataSaveLoadUtility>();
+        TimetableData = load.LoadData<TimetableData>("");
+        if (TimetableData == null)
+        {
+            TimetableData = new TimetableData();
+            TimetableData.InitTimetableData(5, 7);
+        }
+
         string json = JsonConvert.SerializeObject(TimetableData);
         Debug.Log(json);
     }

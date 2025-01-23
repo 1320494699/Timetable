@@ -7,6 +7,7 @@ namespace QFramework.Example
 {
 	public partial class TimeTableItem : ViewController
 	{
+		
 		TimetableItemData mTimetableItemData;
 		public void Init(TimetableItemData timetableItemData)
 		{

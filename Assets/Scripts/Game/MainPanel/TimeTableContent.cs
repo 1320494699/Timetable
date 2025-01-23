@@ -12,7 +12,7 @@ namespace QFramework.Example
 		public void Init()
 		{
 			var timeTable = this.GetModel<TimetableModel>();
-			GenerateTable(timeTable.TimetableData.timetableItems);
+			GenerateTable(timeTable.TimetableData.currWeekTimetableItems);
 			timeTable.TimetableData.OnTimetableItemDataChanged+=OnTimetableItemDataChanged;
 		}
 
