@@ -30,6 +30,7 @@ namespace QFramework
         [HideInInspector] public string ViewControllerFullTypeName = string.Empty;
 
         public string TemplateName => nameof(ViewController);
+        
     }
     
     public class ViewControllerChildAttribute : Attribute
