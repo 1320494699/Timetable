@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using QFramework;
 
@@ -14,6 +15,58 @@ namespace QFramework.Example
 			var timeTable = this.GetModel<TimetableModel>();
 			GenerateTable(timeTable.TimetableData.currWeekTimetableItems);
 			timeTable.TimetableData.OnTimetableItemDataChanged+=OnTimetableItemDataChanged;
+			
+			DateTime dt = DateTime.Today;  //当前时间  
+			DateTime startWeek = dt.AddDays(1 - Convert.ToInt32(dt.DayOfWeek.ToString("d")));  //本周周一  
+			DateTime endWeek = startWeek.AddDays(6);  //本周周日
+        
+			
+			foreach (var timetableItemData in timeTable.TimetableData.timetableItems)
+			{
+				DateTimeRange timeRange1 = new DateTimeRange(timetableItemData.startTime.ToDateTime(), timetableItemData.endTime.ToDateTime());
+				DateTimeRange timeRange2 = new DateTimeRange(startWeek, endWeek);
+
+				DateTimeRange? overlapTimeRange = timeRange1.GetOverlap(timeRange2);
+				if (overlapTimeRange.HasValue)
+				{
+					// 0123456 对应日一二三四五六
+					//让结果左移一位，因为周一对应0，周日对应6
+					int weekdayAdjust(int weekday)
+					{
+						weekday -= 1;
+						if (weekday < 0)
+						{
+							weekday = 6;
+						}
+						return weekday;
+					}
+
+					print("当前周时间有重叠，添加到课表");
+					//计算重叠开始时 是当前周的周几
+					int overlapStartWeekday = weekdayAdjust((int)overlapTimeRange.Value.Start.DayOfWeek);
+					//计算重叠结束时 是当前周的周几
+					int overlapEndWeekday =weekdayAdjust((int)overlapTimeRange.Value.End.DayOfWeek);
+				
+					print("overlapStartWeekday: "+overlapStartWeekday);
+					print("overlapEndWeekday: "+overlapEndWeekday);
+					foreach (var weekday in timetableItemData.weekday)
+					{
+						foreach (var classNumber in timetableItemData.classNumber)
+						{
+							if (overlapEndWeekday >= weekday - 1 && overlapStartWeekday <= weekday - 1)
+							{
+								timeTable.TimetableData.UpdateTimetableItemData(classNumber - 1,
+									weekday - 1 , timetableItemData);
+							} 
+						}
+					}
+					
+				}
+				else
+				{
+					print("当前周时间无重叠");
+				}
+			}
 		}
 
 		private void OnTimetableItemDataChanged(int row, int col, TimetableItemData timetableItemData)

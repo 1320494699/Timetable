@@ -15,20 +15,6 @@ public class TimetableData
     
     public void InitTimetableData(int row, int column)
     {
-        DateTime dt = DateTime.Today;  //当前时间  
-        DateTime startWeek = dt.AddDays(1 - Convert.ToInt32(dt.DayOfWeek.ToString("d")));  //本周周一  
-        DateTime endWeek = startWeek.AddDays(6);  //本周周日  
-        
-        TimetableItemData timetableItemData = new TimetableItemData();
-        timetableItemData.studentName = "学生姓名";
-        timetableItemData.location = "地点";
-        timetableItemData.startTime = new DateTime(2025,1,23).ToString();
-        timetableItemData.endTime = new DateTime(2025,2,23).ToString();
-        timetableItemData.weekday = 2;
-        timetableItemData.classNumber = 1;
-
-        //TimeSpan timeSpan =startWeek;
-        
         currWeekTimetableItems = new TimetableItemData[row, column];
         for (int i = 0; i < row; i++)
         {
@@ -37,6 +23,15 @@ public class TimetableData
                 currWeekTimetableItems[i,j] = new TimetableItemData();
             }
         }
+        TimetableItemData timetableItemData = new TimetableItemData();
+        timetableItemData.studentName = "某某某";
+        timetableItemData.location = "某某机构";
+        timetableItemData.startTime = new DateTime(2025,1,11).ToString();
+        timetableItemData.endTime = new DateTime(2025,2,16).ToString();
+        timetableItemData.weekday = new List<int>() {2, 4};
+        timetableItemData.classNumber = new List<int>() {1, 3};
+        
+        timetableItems.Add(timetableItemData);
     }
     
     ///更新当前周时间表数据
@@ -64,7 +59,7 @@ public class TimetableItemData
     //结束时间
     public string endTime;
     //星期几
-    public int weekday;
+    public List<int> weekday;
     //第几节课
-    public int classNumber;
+    public List<int> classNumber;
 }

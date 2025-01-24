@@ -16,8 +16,5 @@ public class TimetableModel:AbstractModel
             TimetableData = new TimetableData();
             TimetableData.InitTimetableData(5, 7);
         }
-
-        string json = JsonConvert.SerializeObject(TimetableData);
-        Debug.Log(json);
     }
 }
