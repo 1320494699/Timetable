@@ -17,6 +17,8 @@ namespace AdaptiveGrid
 
             int imageWithSpriteCounter = 0;
             foreach (RectTransform element in elements) {
+
+                if(element==null) continue;
                 if (element.TryGetComponent(out Image image)) {
                     images.Add(image);
                     if (image.sprite != null) {
