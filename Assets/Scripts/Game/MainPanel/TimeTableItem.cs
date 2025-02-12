@@ -12,9 +12,8 @@ namespace QFramework.Example
 		public void Init(TimetableItemData timetableItemData)
 		{
 			mTimetableItemData = timetableItemData;
-			
-			Txt_studentName.text = timetableItemData.studentName;
-			Txt_location.text= timetableItemData.location;
+			Txt_studentName.text = timetableItemData.studentData.name;
+			Txt_location.text= timetableItemData.studentData.location;
 		}
 		
 		public void UpdateTimeTableItemData()
