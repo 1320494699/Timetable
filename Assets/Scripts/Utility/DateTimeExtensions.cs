@@ -71,4 +71,28 @@ public static class DateTimeExtensions
         }
         return dates.ToArray();
     }
+    
+    /// <summary>
+    /// 周日对应0，周六对应6
+    /// 调整为 周一对应0，周日对应6 
+    /// </summary>
+    /// <param name="dayOfWeek"></param>
+    /// <returns></returns>
+    public static int WeekdayAdjust(this DayOfWeek dayOfWeek)
+    {
+        int weekday = (int)dayOfWeek;
+        weekday -= 1;
+        if (weekday < 0)
+        {
+            weekday = 6;
+        }
+        return weekday;
+    }
+
+    public static DateTimeRange GetCurrentWeekRange(DateTime dt)
+    {
+        DateTime startWeek = dt.AddDays(1 - Convert.ToInt32(dt.DayOfWeek.ToString("d")));  //本周周一  
+        DateTime endWeek = startWeek.AddDays(6);  //本周周日
+        return new DateTimeRange(startWeek, endWeek);
+    }
 }

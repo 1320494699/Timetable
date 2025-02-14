@@ -13,21 +13,19 @@ namespace QFramework.Example
 		public void Init()
 		{
 			var timeTable = this.GetModel<TimetableModel>();
-			GenerateTable(timeTable.TimetableData.currWeekTimetableItems);
+			InitGenerateTable(timeTable.TimetableData.currWeekTimetableItems);
 			//添加监听
 			timeTable.TimetableData.OnTimetableItemDataChanged+=OnTimetableItemDataChanged;
-			
-			timeTable.RefreshCurrentWeekTimetableData();
 		}
 
 		private void OnTimetableItemDataChanged(int row, int col, TimetableItemData timetableItemData)
 		{
 			//更新表格
-			GetItem(row, col).Init(timetableItemData);
+			GetItem(row, col).UpdateTimeTableItemData(timetableItemData);
 		}
 
 		//初始化生成表格
-		public void GenerateTable(TimetableItemData[,] timetableItemDatas)
+		public void InitGenerateTable(TimetableItemData[,] timetableItemDatas)
 		{
 			int rowCount = timetableItemDatas.GetLength(0);
 			print("rowCount:" + rowCount);
@@ -44,7 +42,8 @@ namespace QFramework.Example
 						{
 							mTimeTableItems[i,j] = self;
 							self.name = "TimeTableItem_" + i + "_" + j;
-							self.Init(timetableItemDatas[i,j]);
+							self.Init(i,j);
+							self.UpdateTimeTableItemData(timetableItemDatas[i,j]);
 						})
 						.Show();
 					

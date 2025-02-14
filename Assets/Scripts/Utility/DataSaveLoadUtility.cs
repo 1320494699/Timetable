@@ -7,6 +7,10 @@ using UnityEngine;
 
 public class DataSaveLoadUtility:IUtility
 {
+    /// <summary>
+    /// 学生数据
+    /// 跳转运行时类型<see cref="StudentData"/>
+    /// </summary>
     [Serializable]
     public class StudentDB
     {
@@ -26,7 +30,9 @@ public class DataSaveLoadUtility:IUtility
         public string weekday { get; set; }
         
         public string classNumber { get; set; }
-
+        //价格
+        public float price;
+        
         public StudentDB()
         {
             
@@ -40,6 +46,7 @@ public class DataSaveLoadUtility:IUtility
             this.location = studentData.location;
             this.weekday = string.Join(",", studentData.weekday);
             this.classNumber = string.Join(",", studentData.classNumber);
+            this.price = studentData.price;
         }
     }
     [Serializable]
@@ -86,11 +93,12 @@ public class DataSaveLoadUtility:IUtility
         TimetableItemDB timetableItemDB = new TimetableItemDB((int)studentId, timetableItemData);
         mSqlManager.Insert(timetableItemDB);
     }
+    //获取已存在的学生数据
     private int GetExistingTimetableItemId(StudentDB studentDB)
     {
         bool recordExists = false;
         string query = 
-            "SELECT studentId FROM StudentDB WHERE name = ? AND grade = ? AND startTime = ? AND endTime = ? AND location = ? AND weekday = ? AND classNumber = ?";
+            "SELECT studentId FROM StudentDB WHERE name = ? AND grade = ? AND startTime = ? AND endTime = ? AND location = ? AND weekday = ? AND classNumber = ? AND price = ?";
         StudentDB result = mSqlManager.QueryFirstRecord<StudentDB>(out recordExists, query,
             studentDB.name,
             studentDB.grade,
@@ -98,7 +106,8 @@ public class DataSaveLoadUtility:IUtility
             studentDB.endTime,
             studentDB.location,
             studentDB.weekday,
-            studentDB.classNumber);
+            studentDB.classNumber,
+            studentDB.price);
         if (recordExists)
         {
             return result.StudentId;
@@ -119,7 +128,7 @@ public class DataSaveLoadUtility:IUtility
                 if (studentDB == null)
                 {
                     Debug.LogError($"item.studentId:{item.studentId} 学生数据不存在");
-                    return new List<TimetableItemData>();
+                    continue;
                 }
                 var studentData = new StudentData();
                 studentData.name = studentDB.name;

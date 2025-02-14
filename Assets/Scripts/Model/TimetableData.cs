@@ -49,6 +49,10 @@ public struct TimetableItemData
     //第几节课
     public int classNumber;
 }
+/// <summary>
+/// 学生信息
+/// 跳转数据库类型<see cref="DataSaveLoadUtility.StudentDB"/>
+/// </summary>
 [System.Serializable]
 public struct StudentData
 {
@@ -65,4 +69,6 @@ public struct StudentData
     public List<int> weekday;
     //第几节课
     public List<int> classNumber;
+    //价格
+    public float price;
 }

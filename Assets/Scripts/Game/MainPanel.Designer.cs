@@ -1,4 +1,4 @@
-// Generate Id:2891622c-d8f6-4670-928e-8343dc44bb33
+// Generate Id:90dbf98c-7301-4504-8d6b-969d3f506c2a
 using UnityEngine;
 
 // 1.请在菜单 编辑器扩展/Namespace Settings 里设置命名空间
@@ -11,6 +11,14 @@ namespace QFramework.Example
 		public QFramework.Example.TimeTableContent TimeTableContent;
 
 		public UnityEngine.UI.Button Btn_Add;
+
+		public UnityEngine.UI.Button Month;
+
+		public QFramework.Example.WeekdayContent WeekdayContent;
+
+		public TMPro.TextMeshProUGUI Txt_Month;
+
+		public TMPro.TextMeshProUGUI Txt_Weekday;
 
 		QFramework.IArchitecture QFramework.IBelongToArchitecture.GetArchitecture()=>App.Interface;
 	}
