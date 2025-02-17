@@ -29,16 +29,7 @@ namespace QFramework.Example
         /// 把学生课时段分解成TimetableItemData集合
         public List<TimetableItemData> DecomposeStudentTimetable(StudentData studentData)
         {
-            //添加测试数据
-            // StudentData studentData = new StudentData();
-            // studentData.name = "某某某";
-            // studentData.location = "某某机构";
-            // studentData.grade = 8;
-            // studentData.startTime = new DateTime(2025,1,11);
-            // studentData.endTime = new DateTime(2025,2,12);
-            // studentData.weekday = new List<int>() {2, 4};
-            // studentData.classNumber = new List<int>() {1, 3};
-
+            
             List<TimetableItemData> timetableItems = new List<TimetableItemData>();
             DateTime startTime = studentData.startTime;
             DateTime endTime = studentData.endTime;
@@ -57,12 +48,9 @@ namespace QFramework.Example
                         timetableItemData.classNumber = studentData.classNumber[j];
                         timetableItems.Add(timetableItemData);
                         Debug.Log($"{studentData.name} {date.ToString("yyyy-MM-dd")} 第{studentData.classNumber[j]}节课");
-
                     }
                 }
-
             }
-
             return timetableItems;
         }
 

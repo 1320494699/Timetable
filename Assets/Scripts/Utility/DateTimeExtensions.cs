@@ -49,7 +49,6 @@ namespace QFramework.Example
         /// <param name="endDate">结束日期</param>
         /// <param name="targetWeekday">星期几</param>
         /// <returns></returns>
-
         public static DateTime[] GetSpecificWeekdayDates(this DateTime startDate, DateTime endDate,
             DayOfWeek targetWeekday)
         {
@@ -98,14 +97,22 @@ namespace QFramework.Example
 
             return weekday;
         }
-
+        /// <summary>
+        /// 获取当前周的日期范围
+        /// </summary>
+        /// <param name="dt"></param>
+        /// <returns></returns>
         public static DateTimeRange GetCurrentWeekRange(DateTime dt)
         {
             DateTime startWeek = dt.AddDays(1 - Convert.ToInt32(dt.DayOfWeek.ToString("d"))); //本周周一  
             DateTime endWeek = startWeek.AddDays(6); //本周周日
             return new DateTimeRange(startWeek, endWeek);
         }
-        
+        /// <summary>
+        /// 获取当前日期是本月的第几周
+        /// </summary>
+        /// <param name="date"></param>
+        /// <returns></returns>
         public static int GetWeekNumberInMonth(this DateTime date)
         {
             // 获取本月第一天
