@@ -1,4 +1,4 @@
-// Generate Id:1d826728-872e-46cf-bce6-94dc0208675a
+// Generate Id:f6bb8c62-50a9-463e-bdc7-762404dda471
 using UnityEngine;
 
 // 1.请在菜单 编辑器扩展/Namespace Settings 里设置命名空间
@@ -8,6 +8,6 @@ namespace QFramework.Example
 	public partial class WeekdayContent : QFramework.IController
 	{
 
-		QFramework.IArchitecture QFramework.IBelongToArchitecture.GetArchitecture()=>App.Interface;
+		QFramework.IArchitecture QFramework.IBelongToArchitecture.GetArchitecture()=>QFramework.Example.App.Interface;
 	}
 }

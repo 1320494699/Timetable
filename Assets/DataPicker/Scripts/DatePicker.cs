@@ -8,7 +8,7 @@ public class DatePicker : UIBehaviour
     private TextMeshProUGUI _dateText = null;
     private Calendar _calendar = null;
     private DateTime _dateTime = DateTime.Today;
-
+    public Calendar.DayClickEvent OnDayClick = new Calendar.DayClickEvent();
     // 通过这个属性获取日期
     public DateTime DateTime
     {
@@ -28,7 +28,11 @@ public class DatePicker : UIBehaviour
     {
         _dateText = transform.Find("DateText").GetComponent<TextMeshProUGUI>();
         _calendar = transform.Find("Calendar").GetComponent<Calendar>();
-        _calendar.OnDayClick.AddListener(dateTime => { DateTime = dateTime; });
+        _calendar.OnDayClick.AddListener(dateTime =>
+        {
+            DateTime = dateTime; 
+            OnDayClick.Invoke(dateTime);
+        });
         transform.Find("PickButton").GetComponent<Button>().onClick.AddListener(() =>
         {
             _calendar.gameObject.SetActive(true);

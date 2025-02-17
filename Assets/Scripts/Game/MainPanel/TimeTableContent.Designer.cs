@@ -1,4 +1,4 @@
-// Generate Id:4683051c-659c-4338-959c-f625ec038e4d
+// Generate Id:d1b627dc-ea8c-4667-807b-a65407d43dd0
 using UnityEngine;
 
 // 1.请在菜单 编辑器扩展/Namespace Settings 里设置命名空间
@@ -10,6 +10,6 @@ namespace QFramework.Example
 
 		public QFramework.Example.TimeTableItem TimeTableItem;
 
-		QFramework.IArchitecture QFramework.IBelongToArchitecture.GetArchitecture()=>App.Interface;
+		QFramework.IArchitecture QFramework.IBelongToArchitecture.GetArchitecture()=>QFramework.Example.App.Interface;
 	}
 }

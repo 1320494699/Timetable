@@ -28,13 +28,15 @@ MonoBehaviour:
       Designer\uFF09\u7684\u547D\u540D\u7A7A\u95F4\u624B\u52A8\u66F4\u6539\r\nnamespace
       QFramework.Example\r\n{\r\n\tpublic partial class DataAddPanel : ViewController\r\n\t{\r\n\t\tvoid
       Start()\r\n\t\t{\r\n\t\t\t// Code Here\r\n\t\t}\r\n\t}\r\n}\r\n"
-    DesignerCode: "// Generate Id:8d998b6f-8ac4-42e2-bd85-e10fe646880b\r\nusing UnityEngine;\r\n\r\n//
+    DesignerCode: "// Generate Id:e05dcd8a-6dbb-4617-9043-8fff84032219\r\nusing UnityEngine;\r\n\r\n//
       1.\u8BF7\u5728\u83DC\u5355 \u7F16\u8F91\u5668\u6269\u5C55/Namespace Settings
       \u91CC\u8BBE\u7F6E\u547D\u540D\u7A7A\u95F4\r\n// 2.\u547D\u540D\u7A7A\u95F4\u66F4\u6539\u540E\uFF0C\u751F\u6210\u4EE3\u7801\u4E4B\u540E\uFF0C\u9700\u8981\u628A\u903B\u8F91\u4EE3\u7801\u6587\u4EF6\uFF08\u975E
       Designer\uFF09\u7684\u547D\u540D\u7A7A\u95F4\u624B\u52A8\u66F4\u6539\r\nnamespace
-      QFramework.Example\r\n{\r\n\tpublic partial class DataAddPanel\r\n\t{\r\n\r\n\t\tpublic
+      QFramework.Example\r\n{\r\n\tpublic partial class DataAddPanel : QFramework.IController\r\n\t{\r\n\r\n\t\tpublic
       TMPro.TMP_InputField IF_Name;\r\n\r\n\t\tpublic TMPro.TMP_InputField IF_Price;\r\n\r\n\t\tpublic
       TMPro.TMP_InputField IF_Grade;\r\n\r\n\t\tpublic UnityEngine.UI.Button Btn_Close;\r\n\r\n\t\tpublic
       DatePicker DP_EndTime;\r\n\r\n\t\tpublic DatePicker DP_StartTime;\r\n\r\n\t\tpublic
       QFramework.Example.WeekdaySelectContent WeekdaySelectContent;\r\n\r\n\t\tpublic
-      QFramework.Example.ClassNumberSelectContent ClassNumberSelectContent;\r\n\r\n\t}\r\n}\r\n"
+      QFramework.Example.ClassNumberSelectContent ClassNumberSelectContent;\r\n\r\n\t\tpublic
+      UnityEngine.UI.Button Btn_Success;\r\n\r\n\t\tpublic TMPro.TMP_InputField IF_Location;\r\n\r\n\t\tpublic
+      TMPro.TextMeshProUGUI Txt_Message;\r\n\r\n\t\tQFramework.IArchitecture QFramework.IBelongToArchitecture.GetArchitecture()=>QFramework.Example.App.Interface;\r\n\t}\r\n}\r\n"
