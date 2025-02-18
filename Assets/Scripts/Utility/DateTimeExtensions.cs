@@ -38,8 +38,10 @@ namespace QFramework.Example
         // 检查一个日期段是否在两个日期之间
         public static bool GetIsOverlap(this DateTimeRange range1, DateTime time)
         {
+            bool isOverlap = (time >= range1.Start && time <= range1.End);
+            //Debug.Log("start:"+range1.Start + " end:" + range1.End + " currentTime:" + time+" isOverlap:"+isOverlap);
             // 日期在范围内
-            return (time >= range1.Start && time <= range1.End);
+            return isOverlap;
         }
 
         /// <summary>
@@ -137,6 +139,72 @@ namespace QFramework.Example
 
             // 计算当前是本月的第几周
             return (daysSinceFirstDay + weekdayOfFirstDay - 1 - offset) / 7 + 1;
+        }
+        /// <summary>
+        /// 计算 本月有几周
+        /// </summary>
+        /// <param name="year"></param>
+        /// <param name="month"></param>
+        /// <returns></returns>
+        public static int GetWeeksInMonth(int year, int month)
+        {
+            // 获取本月的第一天
+            DateTime firstDayOfMonth = new DateTime(year, month, 1);
+            // 获取本月的最后一天
+            DateTime lastDayOfMonth = new DateTime(year, month, DateTime.DaysInMonth(year, month));
+
+            // 计算第一周的天数
+            int daysInFirstWeek = 7 - (int)firstDayOfMonth.DayOfWeek;
+            // 计算最后一周的天数
+            int daysInLastWeek = (int)lastDayOfMonth.DayOfWeek + 1;
+
+            // 计算中间的整周数量
+            int totalDays = DateTime.DaysInMonth(year, month);
+            int middleWeeks = (totalDays - daysInFirstWeek - daysInLastWeek) / 7;
+
+            // 计算总周数
+            int totalWeeks = middleWeeks;
+            if (daysInFirstWeek >= 4)
+            {
+                totalWeeks++;
+            }
+            if (daysInLastWeek >= 4)
+            {
+                totalWeeks++;
+            }
+
+            return totalWeeks;
+        }
+        /// 根据几月、第几周计算周一日期
+        public static DateTime GetMondayOfWeek(int year, int month, int weekNumber)
+        {
+            // 获取本月的第一天
+            DateTime firstDayOfMonth = new DateTime(year, month, 1);
+            int daysInFirstWeek = 7 - (int)firstDayOfMonth.DayOfWeek;
+
+            // 检查第一周是否有效
+            bool firstWeekValid = daysInFirstWeek >= 4;
+
+            // 检查周数是否有效
+            int weeksInMonth = GetWeeksInMonth(year, month);
+            if (weekNumber < 1 || weekNumber > weeksInMonth)
+            {
+                return DateTime.MinValue;
+            }
+
+            // 计算第一周周一的日期
+            DateTime firstMonday;
+            if (firstWeekValid)
+            {
+                firstMonday = firstDayOfMonth.AddDays((int)DayOfWeek.Monday - (int)firstDayOfMonth.DayOfWeek);
+            }
+            else
+            {
+                firstMonday = firstDayOfMonth.AddDays(7 - (int)firstDayOfMonth.DayOfWeek + (int)DayOfWeek.Monday);
+            }
+
+            // 计算指定周数对应的周一日期
+            return firstMonday.AddDays((weekNumber - 1) * 7);
         }
     }
 }

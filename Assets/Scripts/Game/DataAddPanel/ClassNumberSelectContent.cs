@@ -15,15 +15,16 @@ namespace QFramework.Example
 		{
 			for (int i = 0; i < toggles.Length; i++)
 			{
+				int index = i;
 				toggles[i].onValueChanged.AddListener((bool value) =>
 				{
 					if (value)
 					{
-						classNumbers.Add(i);
+						classNumbers.Add(index);
 					}
 					else
 					{
-						classNumbers.Remove(i);
+						classNumbers.Remove(index);
 					}
 				});
 			}

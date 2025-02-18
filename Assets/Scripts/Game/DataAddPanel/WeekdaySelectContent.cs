@@ -15,15 +15,16 @@ namespace QFramework.Example
 		{
 			for (int i = 0; i < toggles.Length; i++)
 			{
+				int index = i;
 				toggles[i].onValueChanged.AddListener((bool value) =>
 				{
 					if (value)
 					{
-						weekdays.Add(i);
+						weekdays.Add(index);
 					}
 					else
 					{
-						weekdays.Remove(i);
+						weekdays.Remove(index);
 					}
 				});
 			}

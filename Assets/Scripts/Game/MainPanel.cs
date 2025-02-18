@@ -16,7 +16,7 @@ namespace QFramework.Example
 			
 			var model = this.GetModel<TimetableModel>();
 
-			DateTime today = new DateTime(2025, 2, 12);
+			DateTime today = DateTime.Today;
 			
 			model.RefreshCurrentWeekTimetableData(today);
 			WeekdayContent.UpdateDay(today);

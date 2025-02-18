@@ -1,6 +1,7 @@
 using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
+using Newtonsoft.Json;
 using UnityEngine;
 using QFramework;
 
@@ -34,8 +35,8 @@ namespace QFramework.Example
 			IF_Location.text = "";
 			IF_Price.text = "";
 			IF_Grade.text = "";
-			DP_StartTime.DateTime = DateTime.Now;
-			DP_EndTime.DateTime = DateTime.Now;
+			DP_StartTime.DateTime = DateTime.Today;
+			DP_EndTime.DateTime = DateTime.Today;
 			WeekdaySelectContent.Init();
 			ClassNumberSelectContent.Init();
 		}
@@ -71,6 +72,7 @@ namespace QFramework.Example
 			data.grade = int.Parse(grade);
 			data.weekday = weekday;
 			data.classNumber = classNumber;
+			print(JsonConvert.SerializeObject(data));
 			var  existedData = mModel.DecomposeStudentTimetable(data);
 			if (mModel.IsTimeConflict(data, existedData))
 			{
@@ -80,6 +82,7 @@ namespace QFramework.Example
 			}
 			foreach (var timetableItemData in existedData)
 			{
+				print("添加" + timetableItemData.studentData.name +" "+timetableItemData.time +" "+timetableItemData.classNumber);
 				mModel.AddTimetableItemData(timetableItemData);
 			}
 			
