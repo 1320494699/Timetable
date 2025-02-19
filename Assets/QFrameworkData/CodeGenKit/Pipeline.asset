@@ -20,23 +20,21 @@ MonoBehaviour:
     NameToFullName: []
     BindInfos: []
     ScriptsFolder: Assets/Scripts/Game
-    ClassName: DataAddPanel
+    ClassName: MainPanel
     Namespace: QFramework.Example
     MainCode: "using UnityEngine;\r\nusing QFramework;\r\n\r\n// 1.\u8BF7\u5728\u83DC\u5355
       \u7F16\u8F91\u5668\u6269\u5C55/Namespace Settings \u91CC\u8BBE\u7F6E\u547D\u540D\u7A7A\u95F4\r\n//
       2.\u547D\u540D\u7A7A\u95F4\u66F4\u6539\u540E\uFF0C\u751F\u6210\u4EE3\u7801\u4E4B\u540E\uFF0C\u9700\u8981\u628A\u903B\u8F91\u4EE3\u7801\u6587\u4EF6\uFF08\u975E
       Designer\uFF09\u7684\u547D\u540D\u7A7A\u95F4\u624B\u52A8\u66F4\u6539\r\nnamespace
-      QFramework.Example\r\n{\r\n\tpublic partial class DataAddPanel : ViewController\r\n\t{\r\n\t\tvoid
+      QFramework.Example\r\n{\r\n\tpublic partial class MainPanel : ViewController\r\n\t{\r\n\t\tvoid
       Start()\r\n\t\t{\r\n\t\t\t// Code Here\r\n\t\t}\r\n\t}\r\n}\r\n"
-    DesignerCode: "// Generate Id:5add0fa9-31fe-46ff-b42f-ea79a09a81fe\r\nusing UnityEngine;\r\n\r\n//
+    DesignerCode: "// Generate Id:43d23359-e9d7-4267-9b3c-5e39d55d27c6\r\nusing UnityEngine;\r\n\r\n//
       1.\u8BF7\u5728\u83DC\u5355 \u7F16\u8F91\u5668\u6269\u5C55/Namespace Settings
       \u91CC\u8BBE\u7F6E\u547D\u540D\u7A7A\u95F4\r\n// 2.\u547D\u540D\u7A7A\u95F4\u66F4\u6539\u540E\uFF0C\u751F\u6210\u4EE3\u7801\u4E4B\u540E\uFF0C\u9700\u8981\u628A\u903B\u8F91\u4EE3\u7801\u6587\u4EF6\uFF08\u975E
       Designer\uFF09\u7684\u547D\u540D\u7A7A\u95F4\u624B\u52A8\u66F4\u6539\r\nnamespace
-      QFramework.Example\r\n{\r\n\tpublic partial class DataAddPanel : QFramework.IController\r\n\t{\r\n\r\n\t\tpublic
-      TMPro.TMP_InputField IF_Name;\r\n\r\n\t\tpublic TMPro.TMP_InputField IF_Price;\r\n\r\n\t\tpublic
-      TMPro.TMP_InputField IF_Grade;\r\n\r\n\t\tpublic UnityEngine.UI.Button Btn_Close;\r\n\r\n\t\tpublic
-      DatePicker DP_EndTime;\r\n\r\n\t\tpublic DatePicker DP_StartTime;\r\n\r\n\t\tpublic
-      QFramework.Example.WeekdaySelectContent WeekdaySelectContent;\r\n\r\n\t\tpublic
-      QFramework.Example.ClassNumberSelectContent ClassNumberSelectContent;\r\n\r\n\t\tpublic
-      UnityEngine.UI.Button Btn_Success;\r\n\r\n\t\tpublic TMPro.TMP_InputField IF_Location;\r\n\r\n\t\tpublic
-      TMPro.TextMeshProUGUI Txt_Message;\r\n\r\n\t\tQFramework.IArchitecture QFramework.IBelongToArchitecture.GetArchitecture()=>QFramework.Example.App.Interface;\r\n\t}\r\n}\r\n"
+      QFramework.Example\r\n{\r\n\tpublic partial class MainPanel : QFramework.IController\r\n\t{\r\n\r\n\t\tpublic
+      QFramework.Example.TimeTableContent TimeTableContent;\r\n\r\n\t\tpublic UnityEngine.UI.Button
+      Btn_Add;\r\n\r\n\t\tpublic UnityEngine.UI.Button Month;\r\n\r\n\t\tpublic QFramework.Example.WeekdayContent
+      WeekdayContent;\r\n\r\n\t\tpublic TMPro.TextMeshProUGUI Txt_Month;\r\n\r\n\t\tpublic
+      TMPro.TextMeshProUGUI Txt_Weekday;\r\n\r\n\t\tpublic UnityEngine.UI.Button
+      Btn_Menu;\r\n\r\n\t\tQFramework.IArchitecture QFramework.IBelongToArchitecture.GetArchitecture()=>QFramework.Example.App.Interface;\r\n\t}\r\n}\r\n"

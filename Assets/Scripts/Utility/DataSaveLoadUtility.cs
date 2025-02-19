@@ -176,6 +176,11 @@ namespace QFramework.Example
             return new List<TimetableItemData>();
         }
 
+        public void ClearData()
+        {
+            mSqlManager.Execute("Delete from TimetableItemDB");
+            mSqlManager.Execute("Delete from StudentDB");
+        }
         public bool CheckHaveTable()
         {
             if (mSqlManager == null)

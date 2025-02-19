@@ -31,7 +31,7 @@ namespace QFramework
 
 	public class Hide : MonoBehaviour
 	{
-		private void Awake()
+		private void Start()
 		{
 			this.gameObject.SetActive(false);
 		}

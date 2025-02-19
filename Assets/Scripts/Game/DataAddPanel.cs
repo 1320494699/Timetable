@@ -80,10 +80,13 @@ namespace QFramework.Example
 				
 				return;
 			}
+
+			var dataSaveLoadUtility = this.GetUtility<DataSaveLoadUtility>();
 			foreach (var timetableItemData in existedData)
 			{
 				print("添加" + timetableItemData.studentData.name +" "+timetableItemData.time +" "+timetableItemData.classNumber);
 				mModel.AddTimetableItemData(timetableItemData);
+				dataSaveLoadUtility.SaveData(timetableItemData);
 			}
 			
 			mModel.RefreshCurrentWeekTimetableData(DateTime.Today);

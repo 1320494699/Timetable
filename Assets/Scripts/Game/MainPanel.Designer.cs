@@ -1,4 +1,4 @@
-// Generate Id:0fa42911-94b3-4134-9c20-9c380cf83606
+// Generate Id:43d23359-e9d7-4267-9b3c-5e39d55d27c6
 using UnityEngine;
 
 // 1.请在菜单 编辑器扩展/Namespace Settings 里设置命名空间
@@ -19,6 +19,8 @@ namespace QFramework.Example
 		public TMPro.TextMeshProUGUI Txt_Month;
 
 		public TMPro.TextMeshProUGUI Txt_Weekday;
+
+		public UnityEngine.UI.Button Btn_Menu;
 
 		QFramework.IArchitecture QFramework.IBelongToArchitecture.GetArchitecture()=>QFramework.Example.App.Interface;
 	}

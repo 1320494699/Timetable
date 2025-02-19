@@ -22,11 +22,16 @@ namespace QFramework.Example
 			WeekdayContent.UpdateDay(today);
 			Txt_Month.text = today.Month+"月";
 			Txt_Weekday.text = today.GetWeekNumberInMonth()+"周";
+			
 			var dataSaveLoadUtility = this.GetUtility<DataSaveLoadUtility>();
 			
 			Btn_Add.onClick.AddListener(() =>
 			{
 				this.SendCommand(new CMD_OpenDataAddPanel());
+			});
+			Btn_Menu.onClick.AddListener(() =>
+			{
+				this.SendCommand(new CMD_OpenMenuPanel());
 			});
 			if (Application.platform == RuntimePlatform.Android)
 			{
