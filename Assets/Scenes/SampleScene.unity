@@ -1448,6 +1448,7 @@ RectTransform:
   - {fileID: 1725818624}
   - {fileID: 1794670652}
   - {fileID: 411388810}
+  - {fileID: 1567459784}
   m_Father: {fileID: 1735885181}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -1512,6 +1513,7 @@ MonoBehaviour:
   PrefabFolder: Assets/Art/Prefab
   ArchitectureFullTypeName: QFramework.Example.App
   ViewControllerFullTypeName: 
+  minSwipeDistance: 200
   TimeTableContent: {fileID: 1334489344}
   Btn_Add: {fileID: 1725818625}
   Month: {fileID: 1489311950}
@@ -10171,6 +10173,41 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1558700856}
   m_CullTransparentMesh: 1
+--- !u!1 &1567459783
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1567459784}
+  m_Layer: 5
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1567459784
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1567459783}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 257484066}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -0.00018311, y: 857.653}
+  m_SizeDelta: {x: 1138.4, y: 245.9539}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1571453499
 GameObject:
   m_ObjectHideFlags: 0
