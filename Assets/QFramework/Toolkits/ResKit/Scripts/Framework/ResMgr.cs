@@ -9,6 +9,7 @@
 
 using System.Collections;
 using System.Linq;
+using UnityEngine.InputSystem;
 
 namespace QFramework
 {
@@ -248,7 +249,7 @@ namespace QFramework
 
         private void OnGUI()
         {
-            if (PlatformCheck.IsEditor && Input.GetKey(KeyCode.F1))
+            if (PlatformCheck.IsEditor && Keyboard.current.f1Key.wasPressedThisFrame)
             {
                 GUILayout.BeginVertical("box");
 

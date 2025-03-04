@@ -4,7 +4,9 @@ using UnityEngine;
 using QFramework;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
-using TouchPhase = UnityEngine.TouchPhase;
+using UnityEngine.InputSystem.Controls;
+using TouchPhase = UnityEngine.InputSystem.TouchPhase;
+
 
 // 1.请在菜单 编辑器扩展/Namespace Settings 里设置命名空间
 // 2.命名空间更改后，生成代码之后，需要把逻辑代码文件（非 Designer）的命名空间手动更改
@@ -12,19 +14,24 @@ namespace QFramework.Example
 {
 	public partial class MainPanel : ViewController
 	{
+		public int currentYear;
+		public int currentMonth;
+		public int currentWeek;
+		public DateTime currentMonday;
+		TimetableModel model;
 		void Start()
 		{
 			TimeTableContent.Init();
 			WeekdayContent.Init();
 			
-			var model = this.GetModel<TimetableModel>();
+			model = this.GetModel<TimetableModel>();
 
 			DateTime today = DateTime.Today;
+			currentYear = today.Year;
+			currentMonth = today.Month;
+			currentWeek = today.GetWeekNumberInMonth();
 			
-			model.RefreshCurrentWeekTimetableData(today);
-			WeekdayContent.UpdateDay(today);
-			Txt_Month.text = today.Month+"月";
-			Txt_Weekday.text = today.GetWeekNumberInMonth()+"周";
+			RefreshData(today);
 			
 			var dataSaveLoadUtility = this.GetUtility<DataSaveLoadUtility>();
 			
@@ -42,6 +49,7 @@ namespace QFramework.Example
 				AndroidStatusBar.statusBarState = AndroidStatusBar.States.TranslucentOverContent;
 			}
 		}
+		
 		[SerializeField] float minSwipeDistance = 200; // 最小滑动距离  
 		private Vector2 mouseStartPos; 
 		private Vector2 startPos;  
@@ -50,15 +58,18 @@ namespace QFramework.Example
 		void Update() {
 			if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer)
 			{
-				if (Input.touchCount > 0) {  
-					Touch touch = Input.GetTouch(0);  
-              
-					if (touch.phase == TouchPhase.Began) {  
-						startPos = touch.position;  
+				Touchscreen touchscreen = Touchscreen.current;
+				if (touchscreen.touches.Count > 0) {  
+					
+					TouchControl activeTouch = touchscreen.touches[0];  
+					
+					if (activeTouch.phase.ReadValue() == TouchPhase.Began) {  
+						startPos = activeTouch.startPosition.ReadValue();  
 					}  
-					else if (touch.phase == TouchPhase.Ended) {  
-						endPos = touch.position;  
-						CheckSwipeDirection();  
+					else if (activeTouch.phase.ReadValue() == TouchPhase.Ended) {  
+						endPos = activeTouch.position.ReadValue();  
+						Vector2 offset = endPos - startPos;  
+						CheckSwipeDirection(offset.x);  
 					}  
 				}  
 			}
@@ -70,25 +81,87 @@ namespace QFramework.Example
       
 				if (Mouse.current.leftButton.wasReleasedThisFrame) {  
 					Vector2 offset = Mouse.current.position.ReadValue() - mouseStartPos;  
-					if (Mathf.Abs(offset.x) > minSwipeDistance) {  
-						Debug.Log(offset.x > 0 ? "右滑" : "左滑"); // <xinliu type="COORDINATORS" id="13" />   
-					}  
+					CheckSwipeDirection(offset.x);  
+					
 				}  
 			}
-			
-			
 		}  
   
-		void CheckSwipeDirection() {  
-			float deltaX = endPos.x - startPos.x;  
-          
+		void CheckSwipeDirection(float deltaX) {  
 			if (Mathf.Abs(deltaX) > minSwipeDistance) {  
 				if (deltaX > 0) {  
-					Debug.Log("右滑"); // <xinliu type="COORDINATORS" id="2,13" />   
+					Debug.Log("右滑"); // 
+					SubWeekNumber();
 				} else {  
 					Debug.Log("左滑");  
+					AddWeekNumber();  
 				}  
 			}  
-		}  
+		}
+
+		public void RefreshData(DateTime today)
+		{
+			model.RefreshCurrentWeekTimetableData(today);
+			WeekdayContent.UpdateDay(today);
+			
+			Txt_Month.text = currentMonth+"月";
+			Txt_Weekday.text = currentWeek+"周";
+			
+			currentMonday = DateTimeExtensions.GetMondayOfWeek(currentYear, currentMonth, currentWeek);
+			print("currentMonday:" + currentMonday);
+			//currentMonth=currentMonday.AddDays(3).Month;
+			
+			//          
+		}
+		/// <summary>
+		/// 添加周数
+		/// </summary>
+		public void AddWeekNumber()
+		{
+			int totalWeek = DateTimeExtensions.GetWeeksInMonth(currentYear, currentMonth);
+			print("totalWeek:" + totalWeek);
+			print("currentWeek:" + currentWeek);
+			if (currentWeek < totalWeek)
+			{
+				currentWeek++;
+				print("currentWeek:" + currentWeek);
+			}
+			else
+			{
+				currentMonth++;
+				if (currentMonth > 12)
+				{
+					currentYear++;
+					currentMonth = 1;
+				}
+				currentWeek = 1;
+			}
+			currentMonday = DateTimeExtensions.GetMondayOfWeek(currentYear, currentMonth, currentWeek);
+			RefreshData(currentMonday);
+		}
+		/// <summary>
+		/// 减少周数
+		/// </summary>
+		public void SubWeekNumber()
+		{
+			
+			if (currentWeek > 1)
+			{
+				currentWeek--;
+			}
+			else
+			{
+				currentMonth--;
+				if (currentMonth < 1)
+				{
+					currentYear--;
+					currentMonth = 12;
+				}
+				int totalWeek = DateTimeExtensions.GetWeeksInMonth(currentYear, currentMonth);
+				currentWeek = totalWeek;
+			}
+			currentMonday = DateTimeExtensions.GetMondayOfWeek(currentYear, currentMonth, currentWeek);
+			RefreshData(currentMonday);
+		}
 	}
 }

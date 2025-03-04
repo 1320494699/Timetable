@@ -1513,6 +1513,9 @@ MonoBehaviour:
   PrefabFolder: Assets/Art/Prefab
   ArchitectureFullTypeName: QFramework.Example.App
   ViewControllerFullTypeName: 
+  currentYear: 0
+  currentMonth: 0
+  currentWeek: 0
   minSwipeDistance: 200
   TimeTableContent: {fileID: 1334489344}
   Btn_Add: {fileID: 1725818625}

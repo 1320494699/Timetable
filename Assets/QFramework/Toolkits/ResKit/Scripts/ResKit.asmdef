@@ -1,15 +1,18 @@
 {
     "name": "ResKit",
+    "rootNamespace": "",
     "references": [
         "QFramework",
-        "QFramework.CoreKit"
+        "QFramework.CoreKit",
+        "Unity.InputSystem"
     ],
-    "optionalUnityReferences": [],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,
     "precompiledReferences": [],
     "autoReferenced": true,
-    "defineConstraints": []
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
 }
