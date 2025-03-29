@@ -34,7 +34,7 @@ namespace QFramework.Example
             public string classNumber { get; set; }
 
             //价格
-            public float price;
+            public float price { get; set; }
 
             public StudentDB()
             {
@@ -78,7 +78,14 @@ namespace QFramework.Example
                 this.classNumber = timetableItemData.classNumber;
             }
         }
-
+        public class sqlite_master
+        {
+            public string type { get; set; }
+            public string name { get; set; }
+            public string tbl_name { get; set; }
+            public int rootpage { get; set; }
+            public string sql { get; set; }
+        }
         SimpleSQLManager mSqlManager;
 
         public void SaveData(TimetableItemData timetableItemData)
@@ -189,12 +196,15 @@ namespace QFramework.Example
             }
 
             // 构建查询语句
-            string query = "SELECT name FROM sqlite_sequence WHERE name=?";
+            string query = "SELECT * FROM sqlite_master WHERE name=?";
 
             // 执行查询
-            var tableNames = mSqlManager.Query<TimetableItemDB>(query, "TimetableItemDB");
+            var tableNames = mSqlManager.Query<sqlite_master>(query, "TimetableItemDB");
             // 执行查询
-            var tableNames1 = mSqlManager.Query<StudentDB>(query, "StudentDB");
+            var tableNames1 = mSqlManager.Query<sqlite_master>(query, "StudentDB");
+            Debug.Log("TimetableItemDB "+ tableNames.Count);
+            Debug.Log("StudentDB " + tableNames1.Count);
+
             if (tableNames.Count <= 0 || tableNames1.Count <= 0)
             {
                 // 创建表

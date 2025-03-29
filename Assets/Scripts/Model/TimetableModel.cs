@@ -108,6 +108,15 @@ namespace QFramework.Example
         ///刷新显示本周课程表数据
         public void RefreshCurrentWeekTimetableData(DateTime currentTime)
         {
+            TimetableData.InitTimetableData(5, 7);
+            for (int r = 0; r < TimetableData.currWeekTimetableItems.GetLength(0); r++)
+            {
+                for (int c = 0; c < TimetableData.currWeekTimetableItems.GetLength(1); c++)
+                {
+                    TimetableData.UpdateTimetableItemData(r,
+                        c, new TimetableItemData());
+                }
+            }
             DateTimeRange currentWeekTimeRange = DateTimeExtensions.GetCurrentWeekRange(currentTime);
             Debug.Log("当前周时间：" + currentWeekTimeRange.Start.ToString("yyyy-MM-dd") + " 至 " + currentWeekTimeRange.End.ToString("yyyy-MM-dd"));
             foreach (var timetableItemData in TimetableData.timetableItems)
@@ -120,6 +129,7 @@ namespace QFramework.Example
                         weekday, timetableItemData);
                     Debug.Log("当前周时间有重叠，添加到课表" + timetableItemData.time.ToString("yyyy-MM-dd") + " 第" + timetableItemData.classNumber + "节课");
                 }
+                
             }
         }
     }

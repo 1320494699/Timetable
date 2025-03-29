@@ -5,6 +5,8 @@ using QFramework;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Controls;
+using UnityEngine.InputSystem.EnhancedTouch;
+using Touch = UnityEngine.InputSystem.EnhancedTouch.Touch;
 using TouchPhase = UnityEngine.InputSystem.TouchPhase;
 
 
@@ -48,6 +50,8 @@ namespace QFramework.Example
 				AndroidStatusBar.dimmed=false;
 				AndroidStatusBar.statusBarState = AndroidStatusBar.States.TranslucentOverContent;
 			}
+			EnhancedTouchSupport.Enable();
+			
 		}
 		
 		[SerializeField] float minSwipeDistance = 200; // 最小滑动距离  
@@ -58,34 +62,53 @@ namespace QFramework.Example
 		void Update() {
 			if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer)
 			{
-				Touchscreen touchscreen = Touchscreen.current;
-				if (touchscreen.touches.Count > 0) {  
-					
-					TouchControl activeTouch = touchscreen.touches[0];  
-					
-					if (activeTouch.phase.ReadValue() == TouchPhase.Began) {  
-						startPos = activeTouch.startPosition.ReadValue();  
-					}  
-					else if (activeTouch.phase.ReadValue() == TouchPhase.Ended) {  
-						endPos = activeTouch.position.ReadValue();  
-						Vector2 offset = endPos - startPos;  
-						CheckSwipeDirection(offset.x);  
-					}  
-				}  
-			}
-			else
-			{
-				if (Mouse.current.leftButton.wasPressedThisFrame) {  
-					mouseStartPos = Mouse.current.position.ReadValue();  
-				}  
-      
-				if (Mouse.current.leftButton.wasReleasedThisFrame) {  
-					Vector2 offset = Mouse.current.position.ReadValue() - mouseStartPos;  
-					CheckSwipeDirection(offset.x);  
-					
-				}  
-			}
-		}  
+				
+                if (Touch.activeFingers.Count > 0)
+                {
+					Touch activeTouch = Touch.activeTouches[0];
+
+                    if (activeTouch.phase == TouchPhase.Began)
+                    {
+                        startPos = activeTouch.screenPosition;
+                    }
+                    else if (activeTouch.phase == TouchPhase.Ended)
+                    {
+                        endPos = activeTouch.screenPosition;
+                        Vector2 offset = endPos - startPos;
+                        CheckSwipeDirection(offset.x);
+                    }
+                }
+                //print(Input.touchCount);
+                //            if (Input.touchCount > 0)
+                //            {
+                //                Touch touch = Input.GetTouch(0);
+                //                if (touch.phase == UnityEngine.TouchPhase.Began)
+                //                {
+                //                    startPos = touch.position;
+                //                }
+                //                else if(touch.phase==UnityEngine.TouchPhase.Ended)
+                //                {
+                //                    endPos = touch.position;
+                //                    Vector2 offset = endPos - startPos;
+                //                    CheckSwipeDirection(offset.x);  
+                //	}
+                //}
+            }
+            else
+            {
+                if (Mouse.current.leftButton.wasPressedThisFrame)
+                {
+                    mouseStartPos = Mouse.current.position.ReadValue();
+                }
+
+                if (Mouse.current.leftButton.wasReleasedThisFrame)
+                {
+                    Vector2 offset = Mouse.current.position.ReadValue() - mouseStartPos;
+                    CheckSwipeDirection(offset.x);
+
+                }
+            }
+        }  
   
 		void CheckSwipeDirection(float deltaX) {  
 			if (Mathf.Abs(deltaX) > minSwipeDistance) {  
